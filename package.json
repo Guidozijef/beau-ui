@@ -1,0 +1,58 @@
+{
+  "name": "doit-ui-web",
+  "version": "1.0.13",
+  "description": "个人基于Ant-Design-Vue@1.6.5封装的业务组件库",
+  "main": "lib/doituiweb.umd.min.js",
+  "private": false,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name doituiweb --dest lib packages/index.js",
+    "xcopytinymce": "xcopy \"public\\tinymce\" \"lib\\tinymce\\\" /S /E /Y"
+  },
+  "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.6",
+    "ant-design-vue": "^1.6.5",
+    "axios": "^0.20.0",
+    "core-js": "^3.6.5",
+    "lodash": "^4.17.20",
+    "tinymce": "^5.7.1",
+    "vue": "^2.6.12",
+    "vue-seamless-scroll": "^1.1.21"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.6",
+    "@vue/cli-plugin-eslint": "^4.5.6",
+    "@vue/cli-service": "^4.5.6",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.12.2",
+    "less-loader": "^5.0.0",
+    "prettier": "^1.19.1",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "@vue/prettier"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
