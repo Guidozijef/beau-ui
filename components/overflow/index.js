@@ -1,0 +1,1 @@
+export { default as NOverflow } from './src/overflow.vue'

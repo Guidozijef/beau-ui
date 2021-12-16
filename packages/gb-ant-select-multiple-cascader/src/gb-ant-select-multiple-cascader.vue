@@ -42,7 +42,7 @@
                 v-for="(itemList, levelIndex) in treeDataList"
                 :key="levelIndex"
               >
-                <li
+                <!-- <li
                   class="cascader-content-item cascader-content-item-check-all"
                   @click="handleCascaderAllItemClick(isCheckAll)"
                   v-if="levelIndex === 0"
@@ -52,7 +52,7 @@
                     v-model="isCheckAll"
                   />
                   <span class="checkbox-text">{{ allText }}</span>
-                </li>
+                </li> -->
                 <li
                   class="cascader-content-item"
                   v-for="(subItem, subIndex) in itemList"
