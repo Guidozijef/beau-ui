@@ -12,22 +12,10 @@ const hiddenAttr = "v-hidden";
 export default {
   name: "overflow",
   props: {
-    getCounter: {
-      type: Function,
-      default: () => {}
-    },
-    getTail: {
-      type: Function,
-      default: () => {}
-    },
-    updateCounter: {
-      type: Function,
-      default: () => {}
-    },
-    onUpdateOverflow: {
-      type: Function,
-      default: () => {}
-    }
+    getCounter: Function,
+    getTail: Function,
+    updateCounter: Function,
+    onUpdateOverflow: Function
   },
   data() {
     return {};
@@ -53,7 +41,7 @@ export default {
       const { children } = self;
       const containerWidth = self.offsetWidth;
       const childWidths = [];
-      const tail = this.$slots.tail ? getTail?.() : null;
+      const tail = this.$slots.tail ? getTail() : null;
       let childWidthSum = tail ? tail.offsetWidth : 0;
       let overflow = false;
       const len = self.children.length - (this.$slots.tail ? 1 : 0);
@@ -99,8 +87,22 @@ export default {
             }
           }
         }
+        const { onUpdateOverflow } = this.$props;
+        if (!overflow) {
+          if (onUpdateOverflow !== undefined) {
+            onUpdateOverflow(false);
+          }
+          counter.setAttribute(hiddenAttr, "");
+        } else {
+          if (onUpdateOverflow !== undefined) {
+            onUpdateOverflow(true);
+          }
+        }
       }
     }
+  },
+  updated() {
+    this.deriveCounter();
   }
 };
 </script>
@@ -112,6 +114,6 @@ export default {
   overflow: hidden;
 }
 [v-hidden] {
-  display: "none" !important;
+  display: none !important;
 }
 </style>
