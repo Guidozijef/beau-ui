@@ -1,7 +1,7 @@
 <template>
   <div class="v-overflow" ref="selfRef">
     <slot></slot>
-    <slot v-if="$slot.counter" name="counter"></slot>
+    <slot v-if="$slots.counter" name="counter"></slot>
     <span v-else style="display:inline-block" ref="counterRef"></span>
     <slot name="tail"></slot>
   </div>
@@ -27,7 +27,7 @@ export default {
     deriveCounter() {
       const self = this.$refs.selfRef;
       const counterRef = this.$refs.counterRef;
-      const { getCounter, getTail } = this.props;
+      const { getCounter, getTail } = this.$props;
       let counter = null;
       if (getCounter !== undefined) {
         counter = getCounter();
@@ -60,7 +60,7 @@ export default {
         childWidthSum += childWidth;
         childWidths[i] = childWidth;
         if (childWidthSum > containerWidth) {
-          const { updateCounter } = this.props;
+          const { updateCounter } = this.$props;
           for (let j = i; j >= 0; --j) {
             const restCount = len - 1 - j;
             if (updateCounter !== undefined) {
@@ -87,16 +87,16 @@ export default {
             }
           }
         }
-        const { onUpdateOverflow } = this.$props;
-        if (!overflow) {
-          if (onUpdateOverflow !== undefined) {
-            onUpdateOverflow(false);
-          }
-          counter.setAttribute(hiddenAttr, "");
-        } else {
-          if (onUpdateOverflow !== undefined) {
-            onUpdateOverflow(true);
-          }
+      }
+      const { onUpdateOverflow } = this.$props;
+      if (!overflow) {
+        if (onUpdateOverflow !== undefined) {
+          onUpdateOverflow(false);
+        }
+        counter.setAttribute(hiddenAttr, "");
+      } else {
+        if (onUpdateOverflow !== undefined) {
+          onUpdateOverflow(true);
         }
       }
     }
@@ -107,10 +107,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="less">
 .v-overflow {
   width: 100%;
-  display: flex;
+  // display: flex;
   overflow: hidden;
 }
 [v-hidden] {

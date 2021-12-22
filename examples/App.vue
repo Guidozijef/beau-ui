@@ -29,14 +29,27 @@
       />
     </a-form-item>
     <a-button type="primary" @click="handleSubmit">提交数据</a-button>
+    <br />
+    <div style="width:240px">
+      <select-multi :options="options"></select-multi>
+    </div>
   </a-form>
 </template>
 <script>
+import SelectMulti from "../components/select-multi";
 export default {
+  components: { SelectMulti },
   data() {
     return {
       form: this.$form.createForm(this, { name: "form" }),
-      multipleTreeData: []
+      multipleTreeData: [],
+      options: [
+        { label: "sdfgsdf1", value: "24" },
+        { label: "sdfgsdf2", value: "34" },
+        { label: "sdfgsdf3", value: "4665" },
+        { label: "sdfgsdf4", value: "57" },
+        { label: "sdfgsdf5", value: "686" }
+      ]
     };
   },
   created() {
@@ -124,7 +137,7 @@ export default {
       });
     },
     change(data) {
-      console.log(data)
+      console.log(data);
     }
   }
 };
