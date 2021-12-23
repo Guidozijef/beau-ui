@@ -44,7 +44,7 @@ export default {
       form: this.$form.createForm(this, { name: "form" }),
       multipleTreeData: [],
       options: [
-        { label: "sdfgsdf1", value: "24" },
+        { label: "sdfgsdfgsdfgssdfg", value: "24" },
         { label: "sdfgsdf2", value: "34" },
         { label: "sdfgsdf3", value: "4665" },
         { label: "sdfgsdf4", value: "57" },
