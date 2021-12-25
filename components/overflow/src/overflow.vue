@@ -10,7 +10,7 @@
 <script>
 const hiddenAttr = "v-hidden";
 export default {
-  name: "overflow",
+  name: "over_flow",
   props: {
     getCounter: Function,
     getTail: Function,
@@ -110,7 +110,7 @@ export default {
 <style lang="less">
 .v-overflow {
   width: 100%;
-  // display: flex;
+  display: flex;
   overflow: hidden;
 }
 [v-hidden] {

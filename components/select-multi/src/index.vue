@@ -5,19 +5,24 @@
         {{ item[optionProps.label] }}
       </a-select-option>
     </a-select>
-    <div class="ant-select-selection--multiple select-self-container" @mousedown="handleClick">
+    <div class="select-self-container" @mousedown="handleClick">
       <overflow :getTail="getTail" :updateCounter="updateCounter" :onUpdateOverflow="onUpdateOverflow">
-        <li class="ant-select-selection__choice select-multi_tags" v-for="(item, index) in selectValue" :key="index">
-          <span>{{ item[optionProps.label] }}</span>
+        <li class="select-multi_tags-box" v-for="(item, index) in selectValue" :key="index">
+          <div class="select-multi_tags">
+            <span>{{ item[optionProps.label] }}</span>
+            <a-icon type="close" class="close" @click="closeTag(item)" />
+          </div>
         </li>
-        <li v-show="isShow" slot="tail" ref="tail" class="ant-select-selection__choice select-multi_tags"></li>
+        <li v-show="isShow" class="select-multi_tags-box" slot="tail" ref="tail">
+          <div class="select-multi_tags"></div>
+        </li>
       </overflow>
     </div>
   </div>
 </template>
 
 <script>
-import overflow from '../../overflow/src/overflow.vue';
+import overflow from "../../overflow/src/overflow.vue";
 export default {
   components: { overflow },
   name: "selectMulti",
@@ -40,7 +45,7 @@ export default {
       selectValue: [],
       value: undefined,
       isOpen: false,
-      isShow: false
+      isShow: false,
     };
   },
   methods: {
@@ -51,20 +56,26 @@ export default {
     handleClick() {
       this.isOpen = true;
     },
-    getTail () {
-      return this.$refs.tail
+    getTail() {
+      return this.$refs.tail;
     },
-    updateCounter (value) {
-      this.$refs.tail.textContent = `+${value}`
+    updateCounter(value) {
+      let Dom = this.$refs.tail
+      Dom.querySelector('.select-multi_tags').textContent = `+${value}`;
     },
-    onUpdateOverflow (isShow) {
-      this.isShow = isShow
-    }
+    onUpdateOverflow(isShow) {
+      this.isShow = isShow;
+    },
+    closeTag(item) {
+      let index = this.value.findIndex((f) => f.value === item.value);
+      // this.value.splice(index, 1);
+      this.selectValue.splice(index, 1);
+    },
   },
   directives: {
     clickOutside: {
       // 初始化指令
-      bind(el, binding, vnode) {
+      bind(el, binding) {
         function clickHandler(e) {
           // 这里判断点击的元素是否是本身，是本身，则返回
           if (el.contains(e.target)) {
@@ -81,7 +92,7 @@ export default {
         document.addEventListener("click", clickHandler);
       },
       update() {},
-      unbind(el, binding) {
+      unbind(el) {
         // 解除事件监听
         document.removeEventListener("click", el.__vueClickOutside__);
         delete el.__vueClickOutside__;
@@ -92,14 +103,38 @@ export default {
 </script>
 
 <style lang="less">
-.select-multi_tags {
-  height: 24px;
-  margin-top: 3px;
-  line-height: 22px;
+.select-multi_tags-box{
+    flex-shrink: 0;
+    position: relative;
+    float: left;
+    padding-top: 3px;
+    padding-right: 4px;
+  .select-multi_tags {
+    height: 24px;
+    line-height: 22px;
+    max-width: 99%;
+    padding: 0 20px 0 10px;
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fafafa;
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    cursor: default;
+    transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    .close{
+      position: absolute;
+      top: calc(50% - 5.5px);
+      right: 8px;
+      cursor: pointer;
+    }
+  }
+
 }
+
 .select-self-container {
+  height: 100%;
   position: absolute;
-  width: 100%;
+  width: calc(100% - 6px);
   top: 1px;
   left: 6px;
 }
