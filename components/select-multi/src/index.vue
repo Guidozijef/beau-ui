@@ -67,7 +67,7 @@ export default {
       this.isShow = isShow;
     },
     closeTag(item) {
-      let index = this.value.findIndex((f) => f.value === item.value);
+      let index = this.selectValue.findIndex((f) => f.key === item.key);
       // this.value.splice(index, 1);
       this.selectValue.splice(index, 1);
     },
