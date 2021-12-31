@@ -33,12 +33,16 @@
     <div style="width:240px">
       <select-multi :options="options"></select-multi>
     </div>
+    <div style="width:240px">
+      <select-self></select-self>
+    </div>
   </a-form>
 </template>
 <script>
 import SelectMulti from "../components/select-multi";
+import SelectSelf from "../components/select-self";
 export default {
-  components: { SelectMulti },
+  components: { SelectMulti, SelectSelf },
   data() {
     return {
       form: this.$form.createForm(this, { name: "form" }),
@@ -47,7 +51,7 @@ export default {
         { label: "sdfgsdfgsdfgssdfg", value: "24" },
         { label: "sdfgsdf2", value: "34" },
         { label: "sdfgsdf3", value: "4665" },
-        { label: "sdfgsdf4", value: "57" },
+        { label: "sdfgs", value: "57" },
         { label: "sdfgsdf5", value: "686" }
       ]
     };
